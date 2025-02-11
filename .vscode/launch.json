@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch Splash Screen",
+        "request": "launch",
+        "type": "dart",
+        "program": "lib/screen/splash_screen.dart"
+      }
+    ]
+  }
+  
