@@ -171,7 +171,6 @@ class DashboardPage extends StatelessWidget {
               ),
             ),
 
-            // GridView untuk menu fitur aplikasi
             GridView.builder(
               padding: EdgeInsets.all(16),
               shrinkWrap: true,
