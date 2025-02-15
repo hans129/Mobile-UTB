@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dashboard.dart'; // Import Dashboard
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -9,13 +10,53 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isObscure = true; // Untuk mengontrol visibilitas password
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _login() {
+  String username = _usernameController.text;
+  String password = _passwordController.text;
+
+  if (username == "admin" && password == "123456") {
+    // Pindah ke Dashboard jika login sukses
+    Navigator.pushReplacement(
+      context,
+     MaterialPageRoute(builder: (context) => DashboardPage()),
+    );
+  } else {
+    // Tampilkan pop-up alert jika login gagal
+    _showErrorDialog();
+  }
+}
+
+// Fungsi untuk menampilkan pop-up alert
+void _showErrorDialog() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text("Login Gagal"),
+        content: const Text("Username atau password salah! "),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Tutup dialog
+            },
+            child: const Text("OK"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
+      child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -30,11 +71,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 30),
 
-            // Input Email
+            // Input Username
             TextField(
+              controller: _usernameController,
               decoration: InputDecoration(
-                labelText: 'Email',
-                prefixIcon: const Icon(Icons.email),
+                labelText: 'Username',
+                prefixIcon: const Icon(Icons.person),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -44,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
 
             // Input Password dengan Toggle Visibility
             TextField(
+              controller: _passwordController,
               obscureText: _isObscure,
               decoration: InputDecoration(
                 labelText: 'Password',
@@ -52,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                   icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off),
                   onPressed: () {
                     setState(() {
-                      _isObscure = !_isObscure; // Toggle visibility
+                      _isObscure = !_isObscure;
                     });
                   },
                 ),
@@ -68,11 +111,9 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {
-                  // Tambahkan aksi login di sini
-                },
+                onPressed: _login,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue, // Warna tombol
+                  backgroundColor: Colors.blue,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
