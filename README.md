@@ -1,6 +1,6 @@
-# coba_aja
+# Mobile UTB
 
-A new Flutter project.
+Ya gitu aja weh bikin aplikasi biar bisa dapet duit + prestasi (kayaknya)
 
 ## Getting Started
 
