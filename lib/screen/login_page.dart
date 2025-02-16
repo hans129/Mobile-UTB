@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   String username = _usernameController.text;
   String password = _passwordController.text;
 
-  if (username == "admin" && password == "123456") {
+  if (username == "24552011030" && password == "20050804") {
     // Pindah ke Dashboard jika login sukses
     Navigator.pushReplacement(
       context,
